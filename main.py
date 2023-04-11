@@ -48,7 +48,7 @@ try:
 except ImportError:
     from tensorboardX import SummaryWriter
 
-logger = logging.getLogger(__name__)
+
 
 
 MODEL_CLASSES = {
@@ -187,7 +187,7 @@ def train_epoch(model, tokenizer, optimizer, scheduler, train_dataloader, tr_los
             # save checkpoint
             if args.local_rank in [-1, 0] and args.save_steps > 0 and global_step % args.save_steps == 0:
                 if args.evaluate_during_training:
-                    save_checkpoint(model, optimizer, scheduler, tokenizer, args)
+                    save_checkpoint(model, optimizer, scheduler, tokenizer, global_step, args)
 
         if args.max_steps > 0 and global_step > args.max_steps:
             epoch_iterator.close()
@@ -351,8 +351,9 @@ def main():
     logging.basicConfig(
         format="%(asctime)s - %(levelname)s - %(name)s -   %(message)s",
         datefmt="%m/%d/%Y %H:%M:%S",
-        level=logging.INFO if args.local_rank in [-1, 0] else logging.WARN,
+        level=logging.INFO #if args.local_rank in [-1, 0] else logging.WARN,
     )
+    logger = logging.getLogger(__name__)
     logger.warning(
         "Process rank: %s, device: %s, n_gpu: %s, distributed training: %s, 16-bits training: %s",
         args.local_rank,
