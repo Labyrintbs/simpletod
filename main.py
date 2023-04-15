@@ -352,6 +352,8 @@ def main():
         format="%(asctime)s - %(levelname)s - %(name)s -   %(message)s",
         datefmt="%m/%d/%Y %H:%M:%S",
         level=logging.INFO #if args.local_rank in [-1, 0] else logging.WARN,
+        filename="./log_file.log",  # specify the file name for logging
+        filemode="a" # specify the file mode ("w" for write, "a" for append)
     )
     logger = logging.getLogger(__name__)
     logger.warning(

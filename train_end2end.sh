@@ -19,7 +19,7 @@ CUDA_VISIBLE_DEVICES=$1 python main.py \
     --do_eval \
     --eval_data_file=$TEST_FILE \
     --evaluate_during_training \
-    --save_steps 10000 \
+    --save_steps 100000 \
     --logging_steps 1000 \
     --per_gpu_train_batch_size $BATCH \
     --num_train_epochs 100

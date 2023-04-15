@@ -44,8 +44,8 @@ multiwoz_data = json.load(open('resources/multi-woz/lex.json','r'))
 # checkpoint = opt.checkpoint
 # model_checkpoint = '../dialog-transformer/output/{}/{}/'.format(exp_name, checkpoint)
 model_checkpoint = opt.checkpoint
-exp_name = os.path.split(model_checkpoint)[0].split('/')[-2]
-
+#exp_name = os.path.split(model_checkpoint)[0].split('/')[-2]
+exp_name = os.path.join('output', 'exp_name')
 multiwoz_db = MultiWozDB()
 
 opt_delex = ArgsParser().parse()
@@ -79,7 +79,7 @@ else:
 model.eval()
 model.to('cuda')
 
-break_tokens = tokenizer.encode(tokenizer._eos_token)
+break_tokens = tokenizer.encode(tokenizer.eos_token)
 MAX_LEN = model.config.n_ctx
 
 
